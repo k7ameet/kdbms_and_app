@@ -118,7 +118,7 @@ public class SelectOption extends AppCompatActivity {
     }
 
     private  void addItemButtonOnClick() {
-        if(text1.getText().equals(null)) {
+        if(text1.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please scan the item's barcode ", Toast.LENGTH_SHORT).show();
         } else if (itemExistsInDatabase()){
             Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
