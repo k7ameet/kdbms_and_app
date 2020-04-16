@@ -124,8 +124,9 @@ public class SelectOption extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
             text1.setText("");
         } else{
-            Toast.makeText(getApplicationContext(), "THIS PART IS INCOMPLETE", Toast.LENGTH_SHORT).show();
             text1.setText("");
+            Intent popupIntent = new Intent(getApplicationContext(), Popup.class);
+            startActivity(popupIntent);
         }
     }
 
