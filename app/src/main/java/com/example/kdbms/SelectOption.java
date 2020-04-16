@@ -126,6 +126,7 @@ public class SelectOption extends AppCompatActivity {
         } else{
             text1.setText("");
             Intent popupIntent = new Intent(getApplicationContext(), Popup.class);
+            popupIntent.putExtra("NEW_ITEM_BARCODE", bcText);
             startActivity(popupIntent);
         }
     }

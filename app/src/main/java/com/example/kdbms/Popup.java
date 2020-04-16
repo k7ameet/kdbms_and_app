@@ -24,7 +24,7 @@ public class Popup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
         Barcode = findViewById(R.id.barcodeDisplay);
-        Barcode.setText("");
+        Barcode.setText(getIntent().getStringExtra("NEW_ITEM_BARCODE"));
         Name = findViewById(R.id.inputName);
         Name.setText("");
         Price = findViewById(R.id.inputPrice);
