@@ -49,9 +49,15 @@ public class Popup extends AppCompatActivity {
         String weight = Weight.getText().toString();
         String desc = Desc.getText().toString();
 
+        // Int values for database
+        int price_int;
+        int weight_int;
+
         if(name.equals("") || price.equals("") || weight.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter all required fields", Toast.LENGTH_SHORT).show();
         } else {
+            price_int = Integer.parseInt(price);
+            weight_int = Integer.parseInt(weight);
             Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
             this.finish();
         }
