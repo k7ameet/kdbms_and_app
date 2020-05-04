@@ -10,6 +10,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Popup extends AppCompatActivity {
 
     EditText Name;
@@ -49,17 +60,47 @@ public class Popup extends AppCompatActivity {
         String weight = Weight.getText().toString();
         String desc = Desc.getText().toString();
 
-        // Int values for database
-        int price_int;
-        int weight_int;
-
         if(name.equals("") || price.equals("") || weight.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter all required fields", Toast.LENGTH_SHORT).show();
         } else {
-            price_int = Integer.parseInt(price);
-            weight_int = Integer.parseInt(weight);
-            Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
-            this.finish();
+            sendToServer(name, desc, price, weight);
         }
+    }
+
+    private void sendToServer(final String name, final String desc, final String price, final String weight){
+        String requestUrl = "http://ptsv2.com/t/1lp3f-1588607923/post";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
+                finishPopup();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace(); //log the error resulting from the request for diagnosis/debugging
+                Toast.makeText(getApplicationContext(), "Error connecting to server, please check internet and try again", Toast.LENGTH_LONG).show();
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> postMap = new HashMap<>();
+                postMap.put("barcode", Barcode.getText().toString());
+                postMap.put("name", name);
+                postMap.put("price", price);
+                postMap.put("weight", weight);
+                postMap.put("desc", desc);
+                //..... Add as many key value pairs in the map as necessary for your request
+                return postMap;
+            }
+        };
+//make the request to your server as indicated in your request url
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+    }
+
+    private void finishPopup(){
+        this.finish();
     }
 }
