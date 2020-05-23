@@ -173,8 +173,7 @@ public class SelectOption extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> postMap = new HashMap<>();
-                postMap.put("barcode", text1.getText().toString());
-                //postMap.put("function", "addtolist);
+                postMap.put("barcode", bcText);
                 return postMap;
             }
         };

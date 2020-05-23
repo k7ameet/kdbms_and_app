@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,20 +61,21 @@ public class Popup extends AppCompatActivity {
         String weight = Weight.getText().toString();
         String desc = Desc.getText().toString();
 
-        if(name.equals("") || price.equals("") || weight.equals("")){
-            Toast.makeText(getApplicationContext(), "Please enter all required fields", Toast.LENGTH_SHORT).show();
+        if(name.equals("")){
+            Toast.makeText(getApplicationContext(), "Please enter a name for the item", Toast.LENGTH_SHORT).show();
         } else {
-            sendToServer(name, desc, price, weight);
+            addItemToDB(name, desc, price, weight);
         }
     }
 
-    private void sendToServer(final String name, final String desc, final String price, final String weight){
-        String requestUrl = "http://ptsv2.com/t/1lp3f-1588607923/post";
+    private void addItemToDB(final String name, final String desc, final String price, final String weight){
+        String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/items/additem";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
-                finishPopup();
+                //finishPopup();
+                Log.e("1337", response);
             }
         }, new Response.ErrorListener() {
             @Override
