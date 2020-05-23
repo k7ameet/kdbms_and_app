@@ -135,7 +135,7 @@ public class ListScan extends AppCompatActivity {
         });
     }
 
-    private  void addItemButtonOnClick() {
+    private  void addButton() {
         if(list.size()==0) {
             Toast.makeText(getApplicationContext(), "There are no items in the list", Toast.LENGTH_SHORT).show();
         } else{
@@ -153,7 +153,7 @@ public class ListScan extends AppCompatActivity {
         }
     }
 
-    private void addButton() {
+    private void addItemButtonOnClick() {
         if(text1.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please scan the item's barcode ", Toast.LENGTH_SHORT).show();
         } else{
@@ -192,7 +192,6 @@ public class ListScan extends AppCompatActivity {
                     } else {
                         list.add(item);
                     }
-                    list.add(item);
                     text1.setText("");
                     Toast.makeText(getApplicationContext(), "Item added to list, scan next item", Toast.LENGTH_SHORT).show();
                 } else {
