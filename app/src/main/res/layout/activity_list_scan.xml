@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ListScan">
 
+    <TextView
+        android:id="@+id/xyzz"
+        android:layout_width="256dp"
+        android:layout_height="99dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="92dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

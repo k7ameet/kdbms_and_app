@@ -74,8 +74,8 @@ public class Popup extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
-                //finishPopup();
-                Log.e("1337", response);
+                finishPopup();
+                //Log.e("1337", response);
             }
         }, new Response.ErrorListener() {
             @Override
