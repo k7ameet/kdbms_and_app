@@ -78,7 +78,7 @@ public class Popup extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace(); //log the error resulting from the request for diagnosis/debugging
+                error.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Error connecting to server, please check internet and try again", Toast.LENGTH_LONG).show();
 
             }
@@ -92,11 +92,9 @@ public class Popup extends AppCompatActivity {
                 postMap.put("price", price);
                 postMap.put("weight", weight);
                 postMap.put("desc", desc);
-                //..... Add as many key value pairs in the map as necessary for your request
                 return postMap;
             }
         };
-//make the request to your server as indicated in your request url
         Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
     }
 

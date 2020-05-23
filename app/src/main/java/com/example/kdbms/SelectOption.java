@@ -17,12 +17,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SelectOption extends AppCompatActivity {
 
@@ -120,24 +128,10 @@ public class SelectOption extends AppCompatActivity {
     private  void addItemButtonOnClick() {
         if(text1.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please scan the item's barcode ", Toast.LENGTH_SHORT).show();
-        } else if (itemExistsInDatabase()){
-            Toast.makeText(getApplicationContext(), "Item added to shopping list", Toast.LENGTH_SHORT).show();
-            text1.setText("");
         } else{
             text1.setText("");
-            Intent popupIntent = new Intent(getApplicationContext(), Popup.class);
-            popupIntent.putExtra("NEW_ITEM_BARCODE", bcText);
-            startActivity(popupIntent);
+            checkDatabaseForItem();
         }
-    }
-
-    private boolean itemExistsInDatabase() {
-
-        // HARDCODED FOR TESTING PURPOSES
-
-        if(text1.getText().toString().equals("9316626102624")){
-            return true;
-        } return false;
     }
 
 
@@ -153,5 +147,43 @@ public class SelectOption extends AppCompatActivity {
         super.onResume();
         getSupportActionBar().hide();
         initCamera();
+    }
+
+    private void checkDatabaseForItem(){
+        String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/items/exists";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.equals("{\"message\":\"false\"}")){
+                    Toast.makeText(getApplicationContext(), "Enter item details", Toast.LENGTH_SHORT).show();
+                    nextPage();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Item is already in database", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error connecting to server, please check internet and try again", Toast.LENGTH_LONG).show();
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> postMap = new HashMap<>();
+                postMap.put("barcode", text1.getText().toString());
+                //postMap.put("function", "addtolist);
+                return postMap;
+            }
+        };
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+    }
+
+    private void nextPage(){
+        Intent intent = new Intent(getApplicationContext(), Popup.class);
+        intent.putExtra("NEW_ITEM_BARCODE", bcText);
+        startActivity(intent);
     }
 }
