@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(checkDetails(Username.getText().toString(), Password.getText().toString())){
-                    Intent intent = new Intent(getApplicationContext(), SelectOption.class);
+                    Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
                     startActivity(intent);
                 } else {
                     Password.setText("");
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkDetails(String username, String password){
-        if(password.equals("12345") && username.equals("admin")){
+        if(password.equals("1") && username.equals("a")){
             return true;
         } return false;
     }
