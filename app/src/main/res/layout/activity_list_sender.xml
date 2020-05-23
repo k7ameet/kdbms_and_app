@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ListSender">
 
+    <TextView
+        android:id="@+id/tvv"
+        android:layout_width="232dp"
+        android:layout_height="195dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="89dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

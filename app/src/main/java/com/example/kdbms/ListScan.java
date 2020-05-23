@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -38,7 +39,7 @@ public class ListScan extends AppCompatActivity {
     ArrayList list;
     private SurfaceView cameraS;
     private TextView text1;
-    private Button addButton, secondButton;
+    private Button addButton, secondButton, b3;
     private CameraSource Src;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private ToneGenerator toneGen;
@@ -67,6 +68,13 @@ public class ListScan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addItemButtonOnClick();
+            }
+        });
+        b3 = findViewById(R.id.button3);
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b3_finish();
             }
         });
         initCamera();
@@ -139,17 +147,8 @@ public class ListScan extends AppCompatActivity {
         if(list.size()==0) {
             Toast.makeText(getApplicationContext(), "There are no items in the list", Toast.LENGTH_SHORT).show();
         } else{
-            String xy = "";
-            int x = list.size();
-            for (int i=0;i<x;i++){
-                ListItem t = (ListItem)list.get(i);
-                if (i==0){
-                    xy = t.convertToJson();
-                } else {
-                    xy = xy + "," + t.convertToJson();
-                }
-            }
-            Toast.makeText(getApplicationContext(), xy, Toast.LENGTH_SHORT).show();
+            String yz = createJson();
+            Toast.makeText(getApplicationContext(), yz, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -159,6 +158,33 @@ public class ListScan extends AppCompatActivity {
         } else{
             addItemToList();
         }
+    }
+
+    private void b3_finish() {
+        if(list.size()==0) {
+            Toast.makeText(getApplicationContext(), "There are no items in the list", Toast.LENGTH_SHORT).show();
+        } else{
+            String finalPackage = "[" + createJson() + "]";
+            Intent intent = new Intent(getApplicationContext(), ListSender.class);
+            intent.putExtra("json_object", finalPackage);
+            intent.putExtra("comp_name", comp_name);
+            intent.putExtra("comp_addr", comp_addr);
+            startActivity(intent);
+        }
+    }
+
+    private String createJson(){
+        String xy = "";
+        int x = list.size();
+        for (int i=0;i<x;i++){
+            ListItem t = (ListItem)list.get(i);
+            if (i==0){
+                xy = t.convertToJson();
+            } else {
+                xy = xy + "," + t.convertToJson();
+            }
+        }
+        return xy;
     }
 
 
