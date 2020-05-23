@@ -129,7 +129,6 @@ public class SelectOption extends AppCompatActivity {
         if(text1.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please scan the item's barcode ", Toast.LENGTH_SHORT).show();
         } else{
-            text1.setText("");
             checkDatabaseForItem();
         }
     }
@@ -156,9 +155,11 @@ public class SelectOption extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.equals("{\"message\":\"false\"}")){
                     Toast.makeText(getApplicationContext(), "Enter item details", Toast.LENGTH_SHORT).show();
+                    text1.setText("");
                     nextPage();
                 } else {
                     Toast.makeText(getApplicationContext(), "Error: Item is already in database", Toast.LENGTH_SHORT).show();
+                    text1.setText("");
                 }
             }
         }, new Response.ErrorListener() {
