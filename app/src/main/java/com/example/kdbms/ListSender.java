@@ -48,8 +48,8 @@ public class ListSender extends AppCompatActivity {
     }
 
     private void send_to_server(){
-        //String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/list/newlist/mobile";
-        String requestUrl = "https://ptsv2.com/t/wa6u0-1590294137/post";
+        String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/list/newlist/mobile";
+        //String requestUrl = "https://ptsv2.com/t/wa6u0-1590294137/post";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -61,7 +61,7 @@ public class ListSender extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                Log.e("1337", error.toString());
                 Toast.makeText(getApplicationContext(), "Error connecting to server, please check internet and try again", Toast.LENGTH_LONG).show();
 
             }
