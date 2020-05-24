@@ -148,7 +148,7 @@ public class ListScan extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "There are no items in the list", Toast.LENGTH_SHORT).show();
         } else{
             String yz = createJson();
-            Toast.makeText(getApplicationContext(), yz, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), yz, Toast.LENGTH_LONG).show();
         }
     }
 
