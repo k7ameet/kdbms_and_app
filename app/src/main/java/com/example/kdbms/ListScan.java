@@ -168,7 +168,8 @@ public class ListScan extends AppCompatActivity {
         } else{
             String finalPackage = "[" + createJson() + "]";
             Intent intent = new Intent(getApplicationContext(), ListSender.class);
-            intent.putExtra("json_object", createJarray());
+            //intent.putExtra("json_object", createJarray());
+            intent.putExtra("json_object", finalPackage);
             intent.putExtra("comp_name", comp_name);
             intent.putExtra("comp_addr", comp_addr);
             startActivity(intent);
