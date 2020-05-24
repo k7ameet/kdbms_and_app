@@ -28,6 +28,8 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -166,7 +168,7 @@ public class ListScan extends AppCompatActivity {
         } else{
             String finalPackage = "[" + createJson() + "]";
             Intent intent = new Intent(getApplicationContext(), ListSender.class);
-            intent.putExtra("json_object", finalPackage);
+            intent.putExtra("json_object", createJarray());
             intent.putExtra("comp_name", comp_name);
             intent.putExtra("comp_addr", comp_addr);
             startActivity(intent);
@@ -185,6 +187,16 @@ public class ListScan extends AppCompatActivity {
             }
         }
         return xy;
+    }
+
+    private String createJarray() {
+        JSONArray jAr = new JSONArray();
+        int x = list.size();
+        for (int i=0;i<x;i++){
+            ListItem t = (ListItem)list.get(i);
+            jAr.put(t.itemToJson());
+        }
+        return jAr.toString();
     }
 
 

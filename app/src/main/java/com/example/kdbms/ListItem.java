@@ -1,5 +1,8 @@
 package com.example.kdbms;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ListItem {
 
     String barcode;
@@ -20,6 +23,18 @@ public class ListItem {
 
     public String getBarcode(){
         return barcode;
+    }
+
+    public JSONObject itemToJson () {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("barcode", barcode);
+            json.put("quantity", quantity);
+            return json;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
 
