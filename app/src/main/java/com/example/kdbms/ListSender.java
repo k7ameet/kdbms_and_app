@@ -2,6 +2,7 @@ package com.example.kdbms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,16 +23,16 @@ import java.util.Map;
 
 public class ListSender extends AppCompatActivity {
 
-    ScrollView scrView;
     Button sendBtn;
     String comp_name, comp_addr, jsonList;
+    TextView textv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_sender);
+        textv = findViewById(R.id.list_display);
         sendBtn = findViewById(R.id.send_to_server_button);
-        scrView = findViewById(R.id.scrollView);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +42,7 @@ public class ListSender extends AppCompatActivity {
         comp_name = getIntent().getStringExtra("comp_name");
         comp_addr = getIntent().getStringExtra("comp_addr");
         jsonList = getIntent().getStringExtra("json_object");
+        textv.setText(jsonList);
     }
 
     private void sendButton() {
@@ -54,9 +56,9 @@ public class ListSender extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(getApplicationContext(), "Shopping list has been created on server", Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), jsonList, Toast.LENGTH_LONG).show();
-                //scrView.text = nothing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Toast.makeText(getApplicationContext(), "Items added to list", Toast.LENGTH_LONG).show();
                 Log.e("1337", response);
+                optionIntent();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -77,5 +79,11 @@ public class ListSender extends AppCompatActivity {
             }
         };
         Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+    }
+
+    private void optionIntent() {
+        Intent intent = new Intent(this, Main2Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
