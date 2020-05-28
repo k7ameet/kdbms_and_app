@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkDetails(String username, String password){
-        if(password.equals("1") && username.equals("a")){
+        if(password.equals("hunter2!") && username.equals("admin")){
             return true;
         } return false;
     }
