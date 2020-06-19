@@ -83,6 +83,10 @@ public class ListScan extends AppCompatActivity {
 
     }
 
+    /*
+    Use back camera to scan barcode.
+     */
+
     private void initCamera() {
 
         BarcodeDetector bDet = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build();
@@ -162,6 +166,10 @@ public class ListScan extends AppCompatActivity {
         }
     }
 
+
+    /*
+    Create JSON object to be sent to server
+     */
     private void b3_finish() {
         if(list.size()==0) {
             Toast.makeText(getApplicationContext(), "There are no items in the list", Toast.LENGTH_SHORT).show();
@@ -176,6 +184,10 @@ public class ListScan extends AppCompatActivity {
         }
     }
 
+
+    /*
+    Convert Object to JSON Object
+     */
     private String createJson(){
         String xy = "";
         int x = list.size();
@@ -214,6 +226,11 @@ public class ListScan extends AppCompatActivity {
         getSupportActionBar().hide();
         initCamera();
     }
+
+    /*
+    Add item to list, but only if this item actually exists in the server.
+    This function asks the server to check for the item.
+     */
 
     private void addItemToList(){
         String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/items/exists";

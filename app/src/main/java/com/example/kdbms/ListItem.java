@@ -3,6 +3,11 @@ package com.example.kdbms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+Object class for creating items that can be added to shipping lists.
+The properties of this item are converted to JSON format to be sent to the server.
+ */
+
 public class ListItem {
 
     String barcode;

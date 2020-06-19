@@ -68,6 +68,11 @@ public class Popup extends AppCompatActivity {
         }
     }
 
+    /*
+    The user can add an item to the database.
+    This function is only called after the item is previously verified in another activity.
+     */
+
     private void addItemToDB(final String name, final String desc, final String price, final String weight){
         String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/items/additem";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {

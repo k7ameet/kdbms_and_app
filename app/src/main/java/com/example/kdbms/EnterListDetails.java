@@ -28,6 +28,10 @@ public class EnterListDetails extends AppCompatActivity {
             public void onClick(View view) { buttonClick(); }});
     }
 
+    /*
+    Details for creating a list are passed onto the next activity. This activity does not directly contact the server
+     */
+
     private void buttonClick() {
         if (comp_name.getText().toString().equals("") || comp_addr.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please enter all required details", Toast.LENGTH_SHORT).show();

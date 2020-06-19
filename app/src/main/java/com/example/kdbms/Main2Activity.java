@@ -26,6 +26,10 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    /*
+    The user can choose what they want to use the app for.
+     */
+
     private void homeButtons(int ind){
         if (ind == 1){
             Intent intent1 = new Intent(getApplicationContext(), SelectOption.class);

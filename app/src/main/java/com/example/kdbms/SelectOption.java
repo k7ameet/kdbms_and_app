@@ -149,8 +149,8 @@ public class SelectOption extends AppCompatActivity {
     }
 
     private void checkDatabaseForItem(){
-        String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/items/exists";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, requestUrl, new Response.Listener<String>() {
+        String url = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/items/exists";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.equals("{\"message\":\"false\"}")){

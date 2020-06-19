@@ -49,6 +49,11 @@ public class ListSender extends AppCompatActivity {
         send_to_server();
     }
 
+    /*
+    Send the entire list to the server.
+    This uses values passed on from previous activities.
+     */
+
     private void send_to_server(){
         String requestUrl = "https://us-central1-korean-export-dbms.cloudfunctions.net/app/api/list/newlist/mobile";
         //String requestUrl = "https://ptsv2.com/t/wa6u0-1590294137/post";
