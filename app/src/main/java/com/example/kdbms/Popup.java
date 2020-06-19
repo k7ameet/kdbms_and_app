@@ -31,6 +31,10 @@ public class Popup extends AppCompatActivity {
     TextView Barcode;
     Button button;
 
+    /*
+    This activity is a popup in which the user enters item details and sends them to the server.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
